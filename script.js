@@ -6,16 +6,13 @@ const gameBoard = (() => {
             cell[i].addEventListener("click", e => {
                 const square = e.target;
                 const squareNum = square.dataset.cell;
-                board[squareNum] = "X";
-                fillCells();
+                board[squareNum] = displayController.setPlayer().marker;
+                updateCells();
             });
         }
     }
-    const markCell = () => {
-        console.log("Hello");
-    }
 
-    const fillCells = () => {
+    const updateCells = () => {
         for (i = 0; i < cell.length; i++) {
             cell[i].textContent = board[i];
         }
@@ -24,8 +21,7 @@ const gameBoard = (() => {
     return {
         board,
         makeButtons,
-        markCell,
-        fillCells,
+        updateCells,
     };
 })();
 
@@ -44,11 +40,24 @@ const displayController = (() => {
     const startGame = () => {
         showTurn();
         gameBoard.makeButtons();
-        gameBoard.fillCells();
+        gameBoard.updateCells();
+    }
+
+    let count = 0
+    const turnCounter = () => {
+        return count++;
     }
 
     const setPlayer = () => {
-        player = playerOne;
+        if (turnCounter() % 2 === 0) {
+            player = playerOne;
+            turnDisplay.textContent = "It's " + playerTwo.name + "'s Move"
+            return player;
+        } else {
+            player = playerTwo;
+            turnDisplay.textContent = "It's " + playerOne.name + "'s Move"
+            return player;
+        }
     }
 
     return {
@@ -56,6 +65,8 @@ const displayController = (() => {
         showTurn,
         startGame,
         setPlayer,
+        turnCounter,
+        count,
     }
 
 })();
