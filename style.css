@@ -1,3 +1,7 @@
+html {
+    background-color: lightpink;
+}
+
 #tictactoe {
     display: grid;
     justify-content: center;
@@ -22,7 +26,7 @@
     width: 100%;
 }
 
-.cell {
+#cell {
     display: flex;
     font-size: 30px;
     align-items: center;
@@ -30,12 +34,32 @@
     border: black;
     border-style: solid;
     border-width: 1px;
+    background-color: rosybrown;
 }
+
+#cell:hover {
+    filter: brightness(80%)
+}
+
 
 #footer {
     padding-top: 15px;
 }
 
 #startButton {
-    font-size: 20px;
+    font-size: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 16%;
+    border: none;
+    background-color: rosybrown;
+}
+
+#replayButton {
+    font-size: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 16%;
+    border: none;
+    background-color: rosybrown;
 }

@@ -17,6 +17,23 @@ const gameBoard = (() => {
         }
     }
 
+    const disableButtons = () => {
+        for (i = 0; i < board.length; i++) {
+            if (gameBoard.board[i] === " ") {
+                gameBoard.board[i] = "_"
+            }
+        }
+    }
+
+    const clearCells = () => {
+        for (i = 0; i < board.length; i++) {
+            if (gameBoard.board[i] != " ") {
+                gameBoard.board[i] = " "
+            }
+        }
+    }
+
+
     const updateCells = () => {
         for (i = 0; i < cell.length; i++) {
             cell[i].textContent = board[i];
@@ -27,6 +44,8 @@ const gameBoard = (() => {
         board,
         makeButtons,
         updateCells,
+        disableButtons,
+        clearCells,
     };
 })();
 
@@ -56,7 +75,7 @@ const displayController = (() => {
     }
 
     const setPlayer = () => {
-        if (turnCounter() % 2 === 0) {
+        if (turnCounter() % 2 === 0 ) {
             player = playerOne;
             turnDisplay.textContent = "It's " + playerTwo.name + "'s Turn"
             return player;
@@ -69,62 +88,92 @@ const displayController = (() => {
 
     const checkTie = () => {
         if(count === 9) {
-            winnerDisplay.textContent = "It's a tie!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "It's a tie!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         }
     }
 
+    const showReplaybutton = () => {
+        let replayButton = document.getElementById("replayButton");
+        replayButton.removeAttribute("hidden");
+    }
+
+    const replayGame = () => {
+        gameBoard.clearCells();
+        gameBoard.updateCells();
+        setPlayer();
+        count = 0;
+        replayButton.setAttribute("hidden", true);
+
+    }
+
     const checkWinner = () => {
-        let winnerDisplay = document.getElementById("winner");
         if (gameBoard.board[0] === "X" && gameBoard.board[1] === "X" && gameBoard.board[2] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[3] === "X" && gameBoard.board[4] === "X" && gameBoard.board[5] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[6] === "X" && gameBoard.board[7] === "X" && gameBoard.board[8] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[0] === "X" && gameBoard.board[3] === "X" && gameBoard.board[6] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[1] === "X" && gameBoard.board[4] === "X" && gameBoard.board[7] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[2] === "X" && gameBoard.board[5] === "X" && gameBoard.board[8] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[0] === "X" && gameBoard.board[4] === "X" && gameBoard.board[8] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[2] === "X" && gameBoard.board[4] === "X" && gameBoard.board[6] === "X") {
-            winnerDisplay.textContent = "Player One wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player One wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         }
         if (gameBoard.board[0] === "O" && gameBoard.board[1] === "O" && gameBoard.board[2] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[3] === "O" && gameBoard.board[4] === "O" && gameBoard.board[5] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[6] === "O" && gameBoard.board[7] === "O" && gameBoard.board[8] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[0] === "O" && gameBoard.board[3] === "O" && gameBoard.board[6] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[1] === "O" && gameBoard.board[4] === "O" && gameBoard.board[7] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[2] === "O" && gameBoard.board[5] === "O" && gameBoard.board[8] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[0] === "O" && gameBoard.board[4] === "O" && gameBoard.board[8] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } else if (gameBoard.board[2] === "O" && gameBoard.board[4] === "O" && gameBoard.board[6] === "O") {
-            winnerDisplay.textContent = "Player Two wins!";
-            winnerDisplay.removeAttribute("hidden");
+            turnDisplay.textContent = "Player Two wins!";
+            gameBoard.disableButtons();
+            showReplaybutton();
         } 
     }
 
@@ -138,6 +187,8 @@ const displayController = (() => {
         checkWinner,
         checkTie,
         count,
+        showReplaybutton,
+        replayGame,
     }
 
 })();
